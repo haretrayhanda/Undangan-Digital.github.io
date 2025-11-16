@@ -19,7 +19,8 @@
       --card-2:rgba(18,20,26,.45);
       --glass-blur:10px;
       --btn-fg:#fff;
-      --btn-bg1:#1b1b1b; --btn-bg2:#101010;
+      --btn-bg1:#1b1b1b; 
+      --btn-bg2:#101010;
       --bg-img:url('img/background2.jpg');
     }
 
@@ -29,20 +30,37 @@
       padding:0;
       scroll-behavior:smooth;
     }
+
+    /* === GLOBAL BACKGROUND FIX === */
     body{
       min-height:100vh;
+      margin:0;
+      padding:0;
+
       color:var(--ink);
       font-family: ui-serif, "Cormorant Garamond", "Playfair Display", "Times New Roman", serif;
-      background:
-        linear-gradient(180deg,var(--veil),rgba(0,0,0,0.4)),
-        var(--bg-img) center/cover no-repeat;
-      background-size:cover;
-      background-position:center;
+
+      background-color:#000;
+      background-image:
+        linear-gradient(180deg, var(--veil), rgba(0,0,0,0.35)),
+        var(--bg-img);
       background-repeat:no-repeat;
+      background-size:contain;       /* HP: gambar utuh, tidak ke-zoom */
+      background-position:center top;
       background-attachment:fixed;
+
       -webkit-font-smoothing:antialiased;
       text-rendering:optimizeLegibility;
     }
+
+    /* Tablet / Desktop: boleh cover supaya lebih penuh */
+    @media (min-width:768px){
+      body{
+        background-size:cover;
+        background-position:center center;
+      }
+    }
+
     img{max-width:100%;display:block;height:auto}
     a{color:var(--gold);text-decoration:none}
     section{padding:80px 18px}
@@ -895,6 +913,7 @@ Namun apabila ingin turut memberikan hadiah dalam bentuk lain, dapat dikirimkan 
 
   render();
 })();
+
 </script>
 </body>
 </html>
