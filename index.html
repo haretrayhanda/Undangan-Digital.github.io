@@ -349,6 +349,7 @@
     .msg .time{
       font-size:.95rem;
       color:var(--muted);
+      margin-top:6px;
     }
 
     /* Dialog full foto */
@@ -426,16 +427,13 @@
       <svg class="ornament" viewBox="0 0 120 16" aria-hidden="true">
         <path d="M4 8 H46 M74 8 H116 M46 8 C52 2, 68 2, 74 8 C68 14, 52 14, 46 8" />
       </svg>
-      <p class="subtitle"
-         style="margin-bottom:4px;font-size:1.1rem;color:var(--gold);">
+      <p class="subtitle" style="margin-bottom:4px;font-size:1.1rem;color:var(--gold);">
         Dear,
       </p>
-      <h2 class="title"
-          style="margin:0 0 6px;font-size:.9rem;letter-spacing:.18em;">
+      <h2 class="title" style="margin:0 0 6px;font-size:.9rem;letter-spacing:.18em;">
         "SPECIAL GUEST"
       </h2>
-      <p class="subtitle"
-         style="margin-top:0;margin-bottom:10px;font-size:1.05rem;color:var(--gold);">
+      <p class="subtitle" style="margin-top:0;margin-bottom:10px;font-size:1.05rem;color:var(--gold);">
         You are warmly invited to celebrate the wedding of :
       </p>
       <h1 class="names" aria-label="Haret dan Jauza">Haret &amp; Jauza</h1>
@@ -500,20 +498,20 @@ tanda-tanda (kebesaran Allah) bagi kaum yang berpikir.
           <ul class="timeline">
             <li>
               <strong>Akad Nikah</strong><br>
-              <small class="date">Jum'at, 27 Mar 2026 • 08.00 WIB</small><br>
+              <small class="date">Sabtu, 28 Mar 2026 • 08.00 WIB</small><br>
               <span class="soft">Aru Indah, Padang</span>
             </li>
             <li>
               <strong>Resepsi</strong><br>
-              <small class="date">Sabtu, 28 Mar 2026 • 11.00–14.00 WIB</small><br>
+              <small class="date">Sabtu, 28 Mar 2026 • 08.00 WIB</small><br>
               <span class="soft">Aru Indah, Padang</span>
             </li>
           </ul>
-          <p class="cap" style="margin-top:10px">Countdown menuju resepsi ditampilkan di bagian atas.</p>
+          <p class="cap" style="margin-top:10px">Countdown menuju acara ditampilkan di bagian atas.</p>
         </div>
 
         <div class="card soft">
-           <h2 class="title center">Lokasi</h2>
+          <h2 class="title center">Lokasi</h2>
           <p class="soft">
             Jl. Aru Indah 17, Lubuk Begalung Nan XX, Kec. Lubuk Begalung, Kota Padang.
           </p>
@@ -552,13 +550,7 @@ tanda-tanda (kebesaran Allah) bagi kaum yang berpikir.
           <button type="button" class="g-prev" id="gPrev" aria-label="Foto sebelumnya">‹</button>
           <button type="button" class="g-next" id="gNext" aria-label="Foto berikutnya">›</button>
           <div class="gallery-dots" id="galleryDots">
-            <span class="active"></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
+            <span class="active"></span><span></span><span></span><span></span><span></span><span></span><span></span>
           </div>
         </div>
 
@@ -616,8 +608,6 @@ Namun apabila ingin turut memberikan hadiah dalam bentuk lain, dapat dikirimkan 
             <button class="copy" data-copy="#bsiNo">Salin</button>
           </div>
           <p class="cap">Catatan: Mohon konfirmasi jika sudah transfer.</p>
-          <img class="qr" src="img/bsi.png" alt="QR BSI / QRIS"
-               style="max-width:160px;border-radius:12px;border:1px solid var(--line)">
         </div>
 
         <div class="card acc">
@@ -630,8 +620,6 @@ Namun apabila ingin turut memberikan hadiah dalam bentuk lain, dapat dikirimkan 
             <button class="copy" data-copy="#jagoNo">Salin</button>
           </div>
           <p class="cap">Catatan: Mohon konfirmasi jika sudah transfer.</p>
-          <img class="qr" src="img/jago.png" alt="QR Jago / QRIS"
-               style="max-width:160px;border-radius:12px;border:1px solid var(--line)">
         </div>
       </div>
     </div>
@@ -721,8 +709,8 @@ Namun apabila ingin turut memberikan hadiah dalam bentuk lain, dapat dikirimkan 
     }
   });
 
-  /* COUNTDOWN */
-  const evtDate = new Date('2026-03-28T11:00:00+07:00').getTime();
+  /* COUNTDOWN — 28 Maret 2026 08:00 WIB */
+  const evtDate = new Date('2026-03-28T08:00:00+07:00').getTime();
   setInterval(()=>{
     const d = Math.max(evtDate - Date.now(), 0);
     const day = Math.floor(d/86400000);
@@ -779,23 +767,19 @@ Namun apabila ingin turut memberikan hadiah dalam bentuk lain, dapat dikirimkan 
 
   function scheduleAuto(){
     if(autoTimer) clearInterval(autoTimer);
-    autoTimer = setInterval(()=>{
-      setGallery(gIndex+1);
-    }, AUTO_MS);
+    autoTimer = setInterval(()=> setGallery(gIndex+1), AUTO_MS);
   }
 
   function userChange(toIndex){
     setGallery(toIndex);
-    scheduleAuto();  // restart auto setiap ada interaksi
+    scheduleAuto();
   }
 
   gPrev.addEventListener('click', ()=> userChange(gIndex-1));
   gNext.addEventListener('click', ()=> userChange(gIndex+1));
 
   thumbs.forEach((btn,idx)=>{
-    btn.addEventListener('click', ()=>{
-      userChange(idx);
-    });
+    btn.addEventListener('click', ()=> userChange(idx));
   });
 
   // Swipe di foto utama
@@ -857,7 +841,7 @@ Namun apabila ingin turut memberikan hadiah dalam bentuk lain, dapat dikirimkan 
     });
   });
 
-  /* UCAPAN (localStorage) */
+  /* UCAPAN (localStorage) — TANPA NAMA PENGIRIM DITAMPILKAN */
   const KEY = 'ucapanList_haret_jauza_dark_v1';
   const form = $('#formUcapan');
   const list = $('#listUcapan');
@@ -872,9 +856,8 @@ Namun apabila ingin turut memberikan hadiah dalam bentuk lain, dapat dikirimkan 
     const arr = load();
     list.innerHTML = arr.map(x=>`
       <div class="msg">
-        <div class="by" style="font-weight:800">${escapeHTML(x.nama)}</div>
         <div>${escapeHTML(x.pesan)}</div>
-        <div class="time">${new Date(x.t).toLocaleString()}</div>
+        <div class="time">${new Date(x.t).toLocaleString('id-ID')}</div>
       </div>
     `).join('');
   };
@@ -882,7 +865,7 @@ Namun apabila ingin turut memberikan hadiah dalam bentuk lain, dapat dikirimkan 
   if(form){
     form.addEventListener('submit', (e)=>{
       e.preventDefault();
-      const nama = $('#nama').value.trim();
+      const nama = $('#nama').value.trim(); // tetap disimpan (opsional), tapi tidak ditampilkan
       const pesan = $('#pesan').value.trim();
       if(!nama || !pesan) return;
       const arr = load();
